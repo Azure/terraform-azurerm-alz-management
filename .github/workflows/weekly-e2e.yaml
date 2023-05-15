@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   full-e2e-check:
-    runs-on: [self-hosted, 1ES.Pool=<YOUR_REPO_NAME>]
+    runs-on: ubuntu-latest
     environment:
       name: crontests
     steps:

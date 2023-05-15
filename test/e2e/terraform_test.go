@@ -13,8 +13,11 @@ func TestExamplesBasic(t *testing.T) {
 	test_helper.RunE2ETest(t, "../../", "examples/basic", terraform.Options{
 		Upgrade: true,
 	}, func(t *testing.T, output test_helper.TerraformOutput) {
-		gotEchoText, ok := output["echo_text"].(string)
+		logAnalyticsId, ok := output["test_log_analytics_workspace_resource_id"].(string)
 		assert.True(t, ok)
-		assert.Regexp(t, regexp.MustCompile("Hello, world!"), gotEchoText)
+		assert.Regexp(t, regexp.MustCompile("/subscriptions/.+/resourceGroups/.+/providers/Microsoft.OperationalInsights/workspaces/.+"), logAnalyticsId)
+		resourceGroupId, ok := output["test_resource_group_resource_id"].(string)
+		assert.True(t, ok)
+		assert.Regexp(t, regexp.MustCompile("/subscriptions/.+/resourceGroups/.+"), resourceGroupId)
 	})
 }
