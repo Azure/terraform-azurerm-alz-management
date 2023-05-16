@@ -8,8 +8,8 @@ resource "azurerm_resource_group" "management" {
 }
 
 resource "azurerm_log_analytics_workspace" "management" {
-  name                               = var.log_analytics_workspace_name
   location                           = var.location
+  name                               = var.log_analytics_workspace_name
   resource_group_name                = var.resource_group_name
   allow_resource_only_permissions    = var.log_analytics_workspace_allow_resource_only_permissions
   cmk_for_query_forced               = var.log_analytics_workspace_cmk_for_query_forced
@@ -24,7 +24,6 @@ resource "azurerm_log_analytics_workspace" "management" {
   depends_on = [
     azurerm_resource_group.management,
   ]
-
 }
 
 
@@ -34,9 +33,9 @@ resource "azurerm_automation_account" "management" {
   location                      = var.location
   name                          = var.automation_account_name
   resource_group_name           = var.resource_group_name
+  sku_name                      = var.automation_account_sku_name
   local_authentication_enabled  = var.automation_account_local_authentication_enabled
   public_network_access_enabled = var.automation_account_public_network_access_enabled
-  sku_name                      = var.automation_account_sku_name
   tags                          = var.tags
 
   dynamic "encryption" {
@@ -47,7 +46,6 @@ resource "azurerm_automation_account" "management" {
       user_assigned_identity_id = var.automation_account_encryption.user_assigned_identity_id
     }
   }
-
   dynamic "identity" {
     for_each = var.automation_account_identity == null ? [] : ["Identity"]
 
@@ -60,7 +58,6 @@ resource "azurerm_automation_account" "management" {
   depends_on = [
     azurerm_resource_group.management,
   ]
-
 }
 
 resource "azurerm_log_analytics_linked_service" "management" {
@@ -76,7 +73,6 @@ resource "azurerm_log_analytics_linked_service" "management" {
     azurerm_log_analytics_workspace.management,
     azurerm_resource_group.management,
   ]
-
 }
 
 resource "azurerm_log_analytics_solution" "management" {
@@ -90,8 +86,8 @@ resource "azurerm_log_analytics_solution" "management" {
   tags                  = var.tags
 
   plan {
-    publisher = "Microsoft"
     product   = "OMSGallery/${each.key}"
+    publisher = "Microsoft"
   }
 
   depends_on = [
@@ -100,5 +96,4 @@ resource "azurerm_log_analytics_solution" "management" {
     azurerm_log_analytics_workspace.management,
     azurerm_resource_group.management,
   ]
-
 }
