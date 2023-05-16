@@ -5,6 +5,7 @@
 **Merged pull requests:**
 
 - Remove Unused Data Block and Clean-up [\#5](https://github.com/luke-taylor/terraform-azurerm-management/pull/5) ([luke-taylor](https://github.com/luke-taylor))
+- Bump github.com/gruntwork-io/terratest from 0.41.23 to 0.41.24 in /test [\#4](https://github.com/luke-taylor/terraform-azurerm-management/pull/4) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Add Resources, Variables, Outputs and Tests [\#3](https://github.com/luke-taylor/terraform-azurerm-management/pull/3) ([luke-taylor](https://github.com/luke-taylor))
 
 
