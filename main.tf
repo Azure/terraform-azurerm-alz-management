@@ -1,8 +1,3 @@
-data "azurerm_resource_group" "management" {
-  count = var.deploy_resource_group ? 0 : 1
-
-  name = var.resource_group_name
-}
 
 resource "azurerm_resource_group" "management" {
   count = var.deploy_resource_group ? 1 : 0
@@ -32,30 +27,6 @@ resource "azurerm_log_analytics_workspace" "management" {
 
 }
 
-resource "azurerm_log_analytics_solution" "management" {
-  for_each = toset(var.log_analytics_solution_names)
-
-
-  location              = var.location
-  resource_group_name   = var.resource_group_name
-  solution_name         = each.key
-  workspace_name        = var.log_analytics_workspace_name
-  workspace_resource_id = azurerm_log_analytics_workspace.management.id
-  tags                  = var.tags
-
-  plan {
-    publisher = "Microsoft"
-    product   = "OMSGallery/${each.key}"
-  }
-
-  depends_on = [
-    azurerm_automation_account.management,
-    azurerm_log_analytics_linked_service.management,
-    azurerm_log_analytics_workspace.management,
-    azurerm_resource_group.management,
-  ]
-
-}
 
 resource "azurerm_automation_account" "management" {
   count = var.deploy_linked_automation_account ? 1 : 0
@@ -102,6 +73,30 @@ resource "azurerm_log_analytics_linked_service" "management" {
 
   depends_on = [
     azurerm_automation_account.management,
+    azurerm_log_analytics_workspace.management,
+    azurerm_resource_group.management,
+  ]
+
+}
+
+resource "azurerm_log_analytics_solution" "management" {
+  for_each = toset(var.log_analytics_solution_names)
+
+  location              = var.location
+  resource_group_name   = var.resource_group_name
+  solution_name         = each.key
+  workspace_name        = var.log_analytics_workspace_name
+  workspace_resource_id = azurerm_log_analytics_workspace.management.id
+  tags                  = var.tags
+
+  plan {
+    publisher = "Microsoft"
+    product   = "OMSGallery/${each.key}"
+  }
+
+  depends_on = [
+    azurerm_automation_account.management,
+    azurerm_log_analytics_linked_service.management,
     azurerm_log_analytics_workspace.management,
     azurerm_resource_group.management,
   ]
