@@ -66,23 +66,62 @@ variable "deploy_resource_group" {
   description = "A boolean flag to determine whether to deploy the Azure Resource Group or not."
 }
 
-variable "log_analytics_solution_names" {
-  type = list(string)
+variable "log_analytics_solution_plans" {
+  type = list(object({
+    product   = string
+    publisher = optional(string, "Microsoft")
+  }))
   default = [
-    "AgentHealthAssessment",
-    "AntiMalware",
-    "ChangeTracking",
-    "ContainerInsights",
-    "Security",
-    "SecurityInsights",
-    "ServiceMap",
-    "SQLAdvancedThreatProtection",
-    "SQLAssessment",
-    "SQLVulnerabilityAssessment",
-    "Updates",
-    "VMInsights",
+    {
+      product   = "OMSGallery/AgentHealthAssessment"
+      publisher = "Microsoft"
+    },
+    {
+      product   = "OMSGallery/AntiMalware"
+      publisher = "Microsoft"
+    },
+    {
+      product   = "OMSGallery/ChangeTracking"
+      publisher = "Microsoft"
+    },
+    {
+      product   = "OMSGallery/ContainerInsights"
+      publisher = "Microsoft"
+    },
+    {
+      product   = "OMSGallery/Security"
+      publisher = "Microsoft"
+    },
+    {
+      product   = "OMSGallery/SecurityInsights"
+      publisher = "Microsoft"
+    },
+    {
+      product   = "OMSGallery/ServiceMap"
+      publisher = "Microsoft"
+    },
+    {
+      product   = "OMSGallery/SQLAdvancedThreatProtection"
+      publisher = "Microsoft"
+    },
+    {
+      product   = "OMSGallery/SQLAssessment"
+      publisher = "Microsoft"
+    },
+    {
+      product   = "OMSGallery/SQLVulnerabilityAssessment"
+      publisher = "Microsoft"
+    },
+    {
+      product   = "OMSGallery/Updates"
+      publisher = "Microsoft"
+    },
+    {
+      product   = "OMSGallery/VMInsights"
+      publisher = "Microsoft"
+    },
   ]
-  description = "The name of the Log Analytics Solution to create."
+  description = "The Log Analytics Solution Plans to create."
 }
 
 variable "log_analytics_workspace_allow_resource_only_permissions" {

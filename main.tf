@@ -76,18 +76,18 @@ resource "azurerm_log_analytics_linked_service" "management" {
 }
 
 resource "azurerm_log_analytics_solution" "management" {
-  for_each = toset(var.log_analytics_solution_names)
+  for_each = { for plan in toset(var.log_analytics_solution_plans) : "${plan.publisher}/${plan.product}" => plan }
 
   location              = var.location
   resource_group_name   = var.resource_group_name
-  solution_name         = each.key
+  solution_name         = basename(each.value.product)
   workspace_name        = var.log_analytics_workspace_name
   workspace_resource_id = azurerm_log_analytics_workspace.management.id
   tags                  = var.tags
 
   plan {
-    product   = "OMSGallery/${each.key}"
-    publisher = "Microsoft"
+    product   = each.value.product
+    publisher = each.value.publisher
   }
 
   depends_on = [
