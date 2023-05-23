@@ -4,6 +4,7 @@
 
 **Merged pull requests:**
 
+- Bump github.com/stretchr/testify from 1.8.2 to 1.8.3 in /test [\#9](https://github.com/luke-taylor/terraform-azurerm-management/pull/9) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump github.com/gruntwork-io/terratest from 0.41.24 to 0.41.25 in /test [\#8](https://github.com/luke-taylor/terraform-azurerm-management/pull/8) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Add Tracing Tags Variables [\#7](https://github.com/luke-taylor/terraform-azurerm-management/pull/7) ([luke-taylor](https://github.com/luke-taylor))
 - Update Log Analytics Solutions Variable  [\#6](https://github.com/luke-taylor/terraform-azurerm-management/pull/6) ([luke-taylor](https://github.com/luke-taylor))
