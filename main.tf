@@ -4,7 +4,15 @@ resource "azurerm_resource_group" "management" {
 
   location = var.location
   name     = var.resource_group_name
-  tags     = var.tags
+  tags = merge(var.tags, (/*<box>*/ (var.tracing_tags_enabled ? { for k, v in /*</box>*/ {
+    avm_git_commit           = "ba28d2019d124ec455bed690e553fe9c7e4e2780"
+    avm_git_file             = "main.tf"
+    avm_git_last_modified_at = "2023-05-15 11:25:58"
+    avm_git_org              = "luke-taylor"
+    avm_git_repo             = "terraform-azurerm-management"
+    avm_yor_name             = "management"
+    avm_yor_trace            = "60670c75-6b16-4e2c-a9dc-251a14711f76"
+  } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 }
 
 resource "azurerm_log_analytics_workspace" "management" {
@@ -19,7 +27,15 @@ resource "azurerm_log_analytics_workspace" "management" {
   reservation_capacity_in_gb_per_day = var.log_analytics_workspace_reservation_capacity_in_gb_per_day
   retention_in_days                  = var.log_analytics_workspace_retention_in_days
   sku                                = var.log_analytics_workspace_sku
-  tags                               = var.tags
+  tags = merge(var.tags, (/*<box>*/ (var.tracing_tags_enabled ? { for k, v in /*</box>*/ {
+    avm_git_commit           = "ba28d2019d124ec455bed690e553fe9c7e4e2780"
+    avm_git_file             = "main.tf"
+    avm_git_last_modified_at = "2023-05-15 11:25:58"
+    avm_git_org              = "luke-taylor"
+    avm_git_repo             = "terraform-azurerm-management"
+    avm_yor_name             = "management"
+    avm_yor_trace            = "6b0b9cbb-113b-408f-9c56-15a30f620be9"
+  } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 
   depends_on = [
     azurerm_resource_group.management,
@@ -36,7 +52,15 @@ resource "azurerm_automation_account" "management" {
   sku_name                      = var.automation_account_sku_name
   local_authentication_enabled  = var.automation_account_local_authentication_enabled
   public_network_access_enabled = var.automation_account_public_network_access_enabled
-  tags                          = var.tags
+  tags = merge(var.tags, (/*<box>*/ (var.tracing_tags_enabled ? { for k, v in /*</box>*/ {
+    avm_git_commit           = "ba28d2019d124ec455bed690e553fe9c7e4e2780"
+    avm_git_file             = "main.tf"
+    avm_git_last_modified_at = "2023-05-15 11:25:58"
+    avm_git_org              = "luke-taylor"
+    avm_git_repo             = "terraform-azurerm-management"
+    avm_yor_name             = "management"
+    avm_yor_trace            = "84bef4a0-3e66-4829-8fe8-79b05d74d68c"
+  } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 
   dynamic "encryption" {
     for_each = var.automation_account_encryption == null ? [] : ["Encryption"]
@@ -83,7 +107,15 @@ resource "azurerm_log_analytics_solution" "management" {
   solution_name         = basename(each.value.product)
   workspace_name        = var.log_analytics_workspace_name
   workspace_resource_id = azurerm_log_analytics_workspace.management.id
-  tags                  = var.tags
+  tags = merge(var.tags, (/*<box>*/ (var.tracing_tags_enabled ? { for k, v in /*</box>*/ {
+    avm_git_commit           = "51687c5014c6b8d7005c26e0258dc1050d10dd01"
+    avm_git_file             = "main.tf"
+    avm_git_last_modified_at = "2023-05-19 12:45:10"
+    avm_git_org              = "luke-taylor"
+    avm_git_repo             = "terraform-azurerm-management"
+    avm_yor_name             = "management"
+    avm_yor_trace            = "56c9e00a-f8ea-412a-82db-2f265f543cce"
+  } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 
   plan {
     product   = each.value.product
