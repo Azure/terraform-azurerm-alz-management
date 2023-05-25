@@ -19,5 +19,7 @@ func TestExamplesBasic(t *testing.T) {
 		resourceGroupId, ok := output["test_resource_group_resource_id"].(string)
 		assert.True(t, ok)
 		assert.Regexp(t, regexp.MustCompile("/subscriptions/.+/resourceGroups/.+"), resourceGroupId)
+		assert.True(t, ok)
+		assert.Regexp(t, regexp.MustCompile("/subscriptions/.+/resourceGroups/.+/providers/Microsoft.Automation/automationAccounts/.+"), output["test_automation_account_resource_id"])
 	})
 }
