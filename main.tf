@@ -11,7 +11,7 @@ resource "azurerm_resource_group" "management" {
     avm_git_org              = "luke-taylor"
     avm_git_repo             = "terraform-azurerm-management"
     avm_yor_name             = "management"
-    avm_yor_trace            = "868afe35-ffd8-4ffe-b4d6-6fc958fc36f6"
+    avm_yor_trace            = "c3c9fd76-7fae-4b5e-9a7a-1231de8e0737"
   } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 }
 
@@ -34,7 +34,7 @@ resource "azurerm_log_analytics_workspace" "management" {
     avm_git_org              = "luke-taylor"
     avm_git_repo             = "terraform-azurerm-management"
     avm_yor_name             = "management"
-    avm_yor_trace            = "3fa1f3bd-34b7-4b5c-bdf5-a59e7a4e7580"
+    avm_yor_trace            = "2bc8d9c9-e306-44a8-9cfd-bd1666c07419"
   } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 
   depends_on = [
@@ -59,7 +59,7 @@ resource "azurerm_automation_account" "management" {
     avm_git_org              = "luke-taylor"
     avm_git_repo             = "terraform-azurerm-management"
     avm_yor_name             = "management"
-    avm_yor_trace            = "6246b17c-711a-40c1-bf6b-797aaba35e57"
+    avm_yor_trace            = "4f4dc8f3-3ed5-44ae-baae-2baead5176f3"
   } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 
   dynamic "encryption" {
@@ -114,7 +114,7 @@ resource "azurerm_log_analytics_solution" "management" {
     avm_git_org              = "luke-taylor"
     avm_git_repo             = "terraform-azurerm-management"
     avm_yor_name             = "management"
-    avm_yor_trace            = "ed8a2b74-fbf9-4b8b-b797-c31633fe0d11"
+    avm_yor_trace            = "e04e94e7-e0f1-4326-9578-afa32407f856"
   } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 
   plan {
