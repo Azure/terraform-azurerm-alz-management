@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   acc-tests:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, 1ES.Pool=terraform-azurerm-alz-management]
     environment:
       name: acctests
     steps:
