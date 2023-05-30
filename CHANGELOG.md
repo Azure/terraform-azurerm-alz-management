@@ -4,6 +4,7 @@
 
 **Merged pull requests:**
 
+- Update Agent Pool [\#2](https://github.com/Azure/terraform-azurerm-alz-management/pull/2) ([luke-taylor](https://github.com/luke-taylor))
 - Bump github.com/gruntwork-io/terratest from 0.41.25 to 0.42.0 in /test [\#1](https://github.com/Azure/terraform-azurerm-alz-management/pull/1) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 
