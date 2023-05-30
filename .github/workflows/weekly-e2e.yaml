@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   full-e2e-check:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, 1ES.Pool=terraform-azurerm-alz-management]
     environment:
       name: crontests
     steps:
