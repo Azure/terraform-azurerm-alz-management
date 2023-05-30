@@ -1,23 +1,165 @@
-# Microsoft Verified Terraform Module
+# terraform-azurerm-alz-management
 
-The Verified Terraform module is a template repository to help developers create their own Terraform Module.
+This module deploys a Log Analytics Workspace in Azure with Log Aanlytics Solutions and a linked Azure Automation Account. 
 
-As we've used Microsoft 1ES Runners Pool as our acceptance test runner, **only Microsoft members could use this template for now**.
+## Features 
+- Deployment of Log Analytics Workspace.
+- Opitional deployment of Azure Automation Account. 
+- Optional deployment of Azure Resource Group. 
+- Customizable Log Analytics Solutions.
 
-Enjoy it by following steps:
+## Example 
 
-1. Use [this template](https://github.com/Azure/terraform-verified-module) to create your repository.
-2. Read [Onboard 1ES hosted Github Runners Pool through Azure Portal](https://eng.ms/docs/cloud-ai-platform/devdiv/one-engineering-system-1es/1es-docs/1es-github-runners/createpoolportal), install [1ES Resource Management](https://github.com/apps/1es-resource-management) on your repo.
-3. Add a Github [Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) named **acctests** in your repo, setup [**Required Reviewers**](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#required-reviewers).
-4. Update [`acc-test.yaml`](.github/workflows/acc-test.yaml), modify `runs-on: [self-hosted, 1ES.Pool=<YOUR_REPO_NAME>]` with your 1es runners' pool name (basically it's your repo's name).
-5. Write Terraform code in a new branch.
-6. Run `docker run --rm -v ${pwd}:/src -w /src mcr.microsoft.com/azterraform:latest make pre-commit` to format the code.
-7. Run `docker run --rm -v $(pwd):/src -w /src mcr.microsoft.com/azterraform:latest make pr-check` to run the check in local.
-8. Create a pull request for the main branch.
-    * CI pr-check will be executed automatically.
-    * Once pr-check was passed, with manually approval, the e2e test and version upgrade test would be executed.
-9. Merge pull request.
-10. Enjoy it!
+```
+module "alz-management" {
+  source  = "Azure/alz-management/azurerm"
+  
+  automation_account_name = "aa-prod-eus-001"
+  location                = "eastus"
+  log_analytics_workspace = "law-prod-eus-001"
+  resource_group_name     = "rg-management-eus-001"
+}
+```
+
+## Enable or Disable Tracing Tags
+
+We're using [BridgeCrew Yor](https://github.com/bridgecrewio/yor) and [yorbox](https://github.com/lonegunmanb/yorbox) to help manage tags consistently across infrastructure as code (IaC) frameworks. This adds accountability for the code responsible for deploying the particular Azure resources. In this module you might see tags like:
+
+```hcl
+resource "azurerm_resource_group" "management" {
+  count = var.deploy_resource_group ? 1 : 0
+
+  location = var.location
+  name     = var.resource_group_name
+  tags = merge(var.tags, (/*<box>*/ (var.tracing_tags_enabled ? { for k, v in /*</box>*/ {
+    avm_git_commit           = "ba28d2019d124ec455bed690e553fe9c7e4e2780"
+    avm_git_file             = "main.tf"
+    avm_git_last_modified_at = "2023-05-15 11:25:58"
+    avm_git_org              = "Azure"
+    avm_git_repo             = "terraform-azurerm-alz-management"
+    avm_yor_name             = "management"
+    avm_yor_trace            = "00a12560-70eb-4d00-81b9-d4059bc7ed62"
+  } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
+}
+```
+
+To enable tracing tags, set the `tracing_tags_enabled` variable to true:
+
+```hcl
+module "example" {
+  source               = "Azure/alz-management/azurerm"
+  ...
+  tracing_tags_enabled = true
+}
+```
+
+The `tracing_tags_enabled` is defaulted to `false`.
+
+To customize the prefix for your tracing tags, set the `tracing_tags_prefix` variable value in your Terraform configuration:
+
+```hcl
+module "example" {
+  source              = "Azure/alz-management/azurerm"
+  ...
+  tracing_tags_enabled = true
+  tracing_tags_prefix  = "custom_prefix_"
+}
+```
+
+The actual applied tags would be:
+
+```text
+{
+  custom_prefix_git_commit           = "ba28d2019d124ec455bed690e553fe9c7e4e2780"
+  custom_prefix_git_file             = "main.tf"
+  custom_prefix_git_last_modified_at = "2023-05-15 11:25:58"
+  custom_prefix_git_org              = "Azure"
+  custom_prefix_git_repo             = "terraform-azurerm-alz-management"
+  custom_prefix_yor_trace            = "00a12560-70eb-4d00-81b9-d4059bc7ed62"
+}
+```
+## Contributing 
+
+### Pre-Commit, Pr-Check, and Test
+
+- [Configure Terraform for Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/terraform-install-configure)
+
+We assumed that you have setup service principal's credentials in your environment variables like below:
+
+```shell
+export ARM_SUBSCRIPTION_ID="<azure_subscription_id>"
+export ARM_TENANT_ID="<azure_subscription_tenant_id>"
+export ARM_CLIENT_ID="<service_principal_appid>"
+export ARM_CLIENT_SECRET="<service_principal_password>"
+```
+
+On Windows Powershell:
+
+```shell
+$env:ARM_SUBSCRIPTION_ID="<azure_subscription_id>"
+$env:ARM_TENANT_ID="<azure_subscription_tenant_id>"
+$env:ARM_CLIENT_ID="<service_principal_appid>"
+$env:ARM_CLIENT_SECRET="<service_principal_password>"
+```
+
+We provide a docker image to run the pre-commit checks and tests for you: `mcr.microsoft.com/azterraform:latest`
+
+To run the pre-commit task, we can run the following command:
+
+```shell
+$ docker run --rm -v $(pwd):/src -w /src mcr.microsoft.com/azterraform:latest make pre-commit
+```
+
+On Windows Powershell:
+
+```shell
+$ docker run --rm -v ${pwd}:/src -w /src mcr.microsoft.com/azterraform:latest make pre-commit
+```
+
+NOTE: If an error occurs in Powershell that indicates `Argument or block definition required` for `unit-fixture/locals.tf` and/or `unit-fixture/variables.tf`, the issue could be that the symlink is not configured properly.  This can be fixed as described in [this link](https://stackoverflow.com/questions/5917249/git-symbolic-links-in-windows/59761201#59761201):
+
+```shell
+$ git config core.symlinks true
+```
+
+Then switch branches, or execute git reset:
+
+```shell
+$ git reset --hard HEAD
+```
+
+In pre-commit task, we will:
+
+1. Run `terraform fmt -recursive` command for your Terraform code.
+2. Run `terrafmt fmt -f` command for markdown files and go code files to ensure that the Terraform code embedded in these files are well formatted.
+3. Run `go mod tidy` and `go mod vendor` for test folder to ensure that all the dependencies have been synced.
+4. Run `gofmt` for all go code files.
+5. Run `gofumpt` for all go code files.
+6. Run `terraform-docs` on `README.md` file, then run `markdown-table-formatter` to format markdown tables in `README.md`.
+
+Then we can run the pr-check task to check whether our code meets our pipeline's requirements (We strongly recommend you run the following command before you commit):
+
+```shell
+$ docker run --rm -v $(pwd):/src -w /src mcr.microsoft.com/azterraform:latest make pr-check
+```
+
+On Windows Powershell:
+
+```shell
+$ docker run --rm -v ${pwd}:/src -w /src mcr.microsoft.com/azterraform:latest make pr-check
+```
+
+To run the e2e-test, we can run the following command:
+
+```text
+docker run --rm -v $(pwd):/src -w /src -e ARM_SUBSCRIPTION_ID -e ARM_TENANT_ID -e ARM_CLIENT_ID -e ARM_CLIENT_SECRET mcr.microsoft.com/azterraform:latest make e2e-test
+```
+
+On Windows Powershell:
+
+```text
+docker run --rm -v ${pwd}:/src -w /src -e ARM_SUBSCRIPTION_ID -e ARM_TENANT_ID -e ARM_CLIENT_ID -e ARM_CLIENT_SECRET mcr.microsoft.com/azterraform:latest make e2e-test
+```
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
