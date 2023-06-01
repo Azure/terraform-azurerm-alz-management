@@ -4,6 +4,7 @@
 
 **Merged pull requests:**
 
+- Code Clean Up  [\#4](https://github.com/Azure/terraform-azurerm-alz-management/pull/4) ([luke-taylor](https://github.com/luke-taylor))
 - Update README [\#3](https://github.com/Azure/terraform-azurerm-alz-management/pull/3) ([luke-taylor](https://github.com/luke-taylor))
 
 ## [v0.1.0](https://github.com/Azure/terraform-azurerm-alz-management/tree/v0.1.0) (2023-05-30)
