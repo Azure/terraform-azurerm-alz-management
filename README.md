@@ -10,7 +10,7 @@ This module deploys a Log Analytics Workspace in Azure with Log Aanlytics Soluti
 
 ## Example 
 
-```
+```hcl
 module "alz-management" {
   source  = "Azure/alz-management/azurerm"
   
