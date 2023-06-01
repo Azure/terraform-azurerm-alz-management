@@ -1,5 +1,5 @@
 module "management" {
-  source                       = "../.."
+  source = "../.."
 
   automation_account_name      = "aa-terraform-azure"
   location                     = "eastus"

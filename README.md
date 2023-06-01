@@ -12,8 +12,8 @@ This module deploys a Log Analytics Workspace in Azure with Log Aanlytics Soluti
 
 ```hcl
 module "alz-management" {
-  source  = "Azure/alz-management/azurerm"
-  
+  source = "Azure/alz-management/azurerm"
+
   automation_account_name = "aa-prod-eus-001"
   location                = "eastus"
   log_analytics_workspace = "law-prod-eus-001"
