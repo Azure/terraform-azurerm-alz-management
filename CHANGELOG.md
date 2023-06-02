@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased](https://github.com/Azure/terraform-azurerm-alz-management/tree/HEAD)
+
+**Merged pull requests:**
+
+- Fix Output Spelling  [\#5](https://github.com/Azure/terraform-azurerm-alz-management/pull/5) ([luke-taylor](https://github.com/luke-taylor))
+
 ## [v0.1.1](https://github.com/Azure/terraform-azurerm-alz-management/tree/v0.1.1) (2023-06-01)
 
 **Merged pull requests:**
