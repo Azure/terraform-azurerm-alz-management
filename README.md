@@ -14,10 +14,10 @@ This module deploys a Log Analytics Workspace in Azure with Log Analytics Soluti
 module "alz-management" {
   source = "Azure/alz-management/azurerm"
 
-  automation_account_name = "aa-prod-eus-001"
-  location                = "eastus"
-  log_analytics_workspace = "law-prod-eus-001"
-  resource_group_name     = "rg-management-eus-001"
+  automation_account_name      = "aa-prod-eus-001"
+  location                     = "eastus"
+  log_analytics_workspace_name = "law-prod-eus-001"
+  resource_group_name          = "rg-management-eus-001"
 }
 ```
 
