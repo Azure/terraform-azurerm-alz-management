@@ -1,4 +1,4 @@
-output "automation_account_msi_prinicpal_id" {
+output "automation_account_msi_principal_id" {
   description = "value of the MSI principal ID for the Azure Automation Account."
   value       = try(azurerm_automation_account.management[0].identity[0].principal_id, null)
 }

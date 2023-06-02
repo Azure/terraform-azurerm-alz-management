@@ -1,6 +1,6 @@
 # terraform-azurerm-alz-management
 
-This module deploys a Log Analytics Workspace in Azure with Log Aanlytics Solutions and a linked Azure Automation Account. 
+This module deploys a Log Analytics Workspace in Azure with Log Analytics Solutions and a linked Azure Automation Account. 
 
 ## Features 
 - Deployment of Log Analytics Workspace.
@@ -221,7 +221,7 @@ No modules.
 
 | Name                                                                                                                                                  | Description                                                     |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
-| <a name="output_automation_account_msi_prinicpal_id"></a> [automation\_account\_msi\_prinicpal\_id](#output\_automation\_account\_msi\_prinicpal\_id) | value of the MSI principal ID for the Azure Automation Account. |
+| <a name="output_automation_account_msi_principal_id"></a> [automation\_account\_msi\_principal\_id](#output\_automation\_account\_msi\_principal\_id) | value of the MSI principal ID for the Azure Automation Account. |
 | <a name="output_automation_account_resource_id"></a> [automation\_account\_resource\_id](#output\_automation\_account\_resource\_id)                  | value of the resource ID for the Azure Automation Account.      |
 | <a name="output_log_analytics_workspace_resource_id"></a> [log\_analytics\_workspace\_resource\_id](#output\_log\_analytics\_workspace\_resource\_id) | value of the resource ID for the Log Analytics Workspace.       |
 | <a name="output_resource_group_resource_id"></a> [resource\_group\_resource\_id](#output\_resource\_group\_resource\_id)                              | value of the resource ID for the Azure Resource Group.          |
