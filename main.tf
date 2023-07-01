@@ -5,13 +5,13 @@ resource "azurerm_resource_group" "management" {
   location = var.location
   name     = var.resource_group_name
   tags = merge(var.tags, (/*<box>*/ (var.tracing_tags_enabled ? { for k, v in /*</box>*/ {
-    avm_git_commit           = "ba28d2019d124ec455bed690e553fe9c7e4e2780"
+    avm_git_commit           = "1d6d1d1e10a034a8773d4494edaaa71e490ce83f"
     avm_git_file             = "main.tf"
-    avm_git_last_modified_at = "2023-05-15 11:25:58"
+    avm_git_last_modified_at = "2023-07-01 12:42:48"
     avm_git_org              = "Azure"
     avm_git_repo             = "terraform-azurerm-alz-management"
     avm_yor_name             = "management"
-    avm_yor_trace            = "0fc533a0-4e31-4fa6-a0cb-321fbc1e44db"
+    avm_yor_trace            = "50252acd-357e-43f4-bbce-bfd67d7357e1"
   } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 }
 
@@ -34,7 +34,7 @@ resource "azurerm_log_analytics_workspace" "management" {
     avm_git_org              = "Azure"
     avm_git_repo             = "terraform-azurerm-alz-management"
     avm_yor_name             = "management"
-    avm_yor_trace            = "96b0c0af-b447-4938-bbdf-6d1628ef366f"
+    avm_yor_trace            = "ea0113c7-47ba-4660-81fc-36a97c70eafa"
   } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 
   depends_on = [
@@ -53,13 +53,13 @@ resource "azurerm_automation_account" "management" {
   local_authentication_enabled  = var.automation_account_local_authentication_enabled
   public_network_access_enabled = var.automation_account_public_network_access_enabled
   tags = merge(var.tags, (/*<box>*/ (var.tracing_tags_enabled ? { for k, v in /*</box>*/ {
-    avm_git_commit           = "ba28d2019d124ec455bed690e553fe9c7e4e2780"
+    avm_git_commit           = "1d6d1d1e10a034a8773d4494edaaa71e490ce83f"
     avm_git_file             = "main.tf"
-    avm_git_last_modified_at = "2023-05-15 11:25:58"
+    avm_git_last_modified_at = "2023-07-01 12:42:48"
     avm_git_org              = "Azure"
     avm_git_repo             = "terraform-azurerm-alz-management"
     avm_yor_name             = "management"
-    avm_yor_trace            = "16c51892-3dee-42ca-9165-c0e21134c616"
+    avm_yor_trace            = "488207ed-9ab0-4099-b1d8-f0f9e8ad8fc0"
   } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 
   dynamic "encryption" {
@@ -114,7 +114,7 @@ resource "azurerm_log_analytics_solution" "management" {
     avm_git_org              = "Azure"
     avm_git_repo             = "terraform-azurerm-alz-management"
     avm_yor_name             = "management"
-    avm_yor_trace            = "455c7e97-83cf-4f36-8d7e-26c4af024782"
+    avm_yor_trace            = "8c9df20c-17f2-44ed-a3a5-27ab426be419"
   } /*<box>*/ : replace(k, "avm_", var.tracing_tags_prefix) => v } : {}) /*</box>*/))
 
   plan {

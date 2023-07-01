@@ -60,12 +60,6 @@ variable "linked_automation_account_creation_enabled" {
   description = "A boolean flag to determine whether to deploy the Azure Automation Account linked to the Log Analytics Workspace or not."
 }
 
-variable "resource_group_creation_enabled" {
-  type        = bool
-  default     = true
-  description = "A boolean flag to determine whether to deploy the Azure Resource Group or not."
-}
-
 variable "log_analytics_solution_plans" {
   type = list(object({
     product   = string
@@ -170,6 +164,12 @@ variable "log_analytics_workspace_sku" {
   type        = string
   default     = "PerGB2018"
   description = "The SKU to use for the Log Analytics Workspace."
+}
+
+variable "resource_group_creation_enabled" {
+  type        = bool
+  default     = true
+  description = "A boolean flag to determine whether to deploy the Azure Resource Group or not."
 }
 
 variable "tags" {
