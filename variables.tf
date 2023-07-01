@@ -54,13 +54,13 @@ variable "automation_account_sku_name" {
   description = "The name of the SKU for the Azure Automation Account to create."
 }
 
-variable "deploy_linked_automation_account" {
+variable "linked_automation_account_creation_enabled" {
   type        = bool
   default     = true
   description = "A boolean flag to determine whether to deploy the Azure Automation Account linked to the Log Analytics Workspace or not."
 }
 
-variable "deploy_resource_group" {
+variable "resource_group_creation_enabled" {
   type        = bool
   default     = true
   description = "A boolean flag to determine whether to deploy the Azure Resource Group or not."

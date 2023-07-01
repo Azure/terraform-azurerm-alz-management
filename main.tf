@@ -1,6 +1,6 @@
 
 resource "azurerm_resource_group" "management" {
-  count = var.deploy_resource_group ? 1 : 0
+  count = var.resource_group_creation_enabled ? 1 : 0
 
   location = var.location
   name     = var.resource_group_name
@@ -44,7 +44,7 @@ resource "azurerm_log_analytics_workspace" "management" {
 
 
 resource "azurerm_automation_account" "management" {
-  count = var.deploy_linked_automation_account ? 1 : 0
+  count = var.linked_automation_account_creation_enabled ? 1 : 0
 
   location                      = var.location
   name                          = var.automation_account_name
@@ -85,7 +85,7 @@ resource "azurerm_automation_account" "management" {
 }
 
 resource "azurerm_log_analytics_linked_service" "management" {
-  count = var.deploy_linked_automation_account ? 1 : 0
+  count = var.linked_automation_account_creation_enabled ? 1 : 0
 
   resource_group_name = var.resource_group_name
   workspace_id        = azurerm_log_analytics_workspace.management.id
