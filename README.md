@@ -12,7 +12,8 @@ This module deploys a Log Analytics Workspace in Azure with Log Analytics Soluti
 
 ```hcl
 module "alz-management" {
-  source = "Azure/alz-management/azurerm"
+  source  = "Azure/alz-management/azurerm"
+  version = "<version>" # change this to your desired version, https://www.terraform.io/language/expressions/version-constraints
 
   automation_account_name      = "aa-prod-eus-001"
   location                     = "eastus"
@@ -27,8 +28,7 @@ We're using [BridgeCrew Yor](https://github.com/bridgecrewio/yor) and [yorbox](h
 
 ```hcl
 resource "azurerm_resource_group" "management" {
-  count   = var.resource_group_creation_enabled ? 1 : 0
-  version = "<version>" # change this to your desired version, https://www.terraform.io/language/expressions/version-constraints
+  count = var.resource_group_creation_enabled ? 1 : 0
 
   location = var.location
   name     = var.resource_group_name
@@ -48,8 +48,14 @@ To enable tracing tags, set the `tracing_tags_enabled` variable to true:
 
 ```hcl
 module "example" {
-  source               = "Azure/alz-management/azurerm"
-  ...
+  source  = "Azure/alz-management/azurerm"
+  version = "<version>" # change this to your desired version, https://www.terraform.io/language/expressions/version-constraints
+
+  automation_account_name      = "aa-prod-eus-001"
+  location                     = "eastus"
+  log_analytics_workspace_name = "law-prod-eus-001"
+  resource_group_name          = "rg-management-eus-001"
+
   tracing_tags_enabled = true
 }
 ```
@@ -60,8 +66,14 @@ To customize the prefix for your tracing tags, set the `tracing_tags_prefix` var
 
 ```hcl
 module "example" {
-  source              = "Azure/alz-management/azurerm"
-  ...
+  source  = "Azure/alz-management/azurerm"
+  version = "<version>" # change this to your desired version, https://www.terraform.io/language/expressions/version-constraints
+
+  automation_account_name      = "aa-prod-eus-001"
+  location                     = "eastus"
+  log_analytics_workspace_name = "law-prod-eus-001"
+  resource_group_name          = "rg-management-eus-001"
+
   tracing_tags_enabled = true
   tracing_tags_prefix  = "custom_prefix_"
 }
