@@ -4,6 +4,7 @@
 
 **Merged pull requests:**
 
+- Update Readme [\#12](https://github.com/Azure/terraform-azurerm-alz-management/pull/12) ([luke-taylor](https://github.com/luke-taylor))
 - Update Variable Names  [\#11](https://github.com/Azure/terraform-azurerm-alz-management/pull/11) ([luke-taylor](https://github.com/luke-taylor))
 - Bump github.com/gruntwork-io/terratest from 0.43.0 to 0.43.4 in /test [\#10](https://github.com/Azure/terraform-azurerm-alz-management/pull/10) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump github.com/Azure/terraform-module-test-helper from 0.13.0 to 0.14.0 in /test [\#9](https://github.com/Azure/terraform-azurerm-alz-management/pull/9) ([dependabot[bot]](https://github.com/apps/dependabot))
