@@ -1,20 +1,26 @@
 data "azurerm_client_config" "current" {}
 
+resource "random_password" "management" {
+  length  = 8
+  special = false
+  upper   = false
+}
+
 resource "azurerm_resource_group" "management" {
   name     = "rg-terraform-azure-complete"
   location = "westeurope"
 }
 
 resource "azurerm_key_vault" "management" {
-  name                        = "kv-terraform-azure"
+  name                        = "kv-${random_password.management.result}-azure"
   location                    = azurerm_resource_group.management.location
   resource_group_name         = azurerm_resource_group.management.name
   enabled_for_disk_encryption = true
   tenant_id                   = data.azurerm_client_config.current.tenant_id
   purge_protection_enabled    = true
   soft_delete_retention_days  = 7
-  sku_name = "standard"
-  
+  sku_name                    = "standard"
+
   network_acls {
     default_action = "Deny"
     bypass         = "AzureServices"
@@ -84,7 +90,7 @@ module "management" {
   log_analytics_workspace_internet_query_enabled             = true
   log_analytics_workspace_reservation_capacity_in_gb_per_day = 200
   log_analytics_workspace_retention_in_days                  = 50
-  log_analytics_workspace_sku                                = "Premium"
+  log_analytics_workspace_sku                                = "CapacityReservation"
   resource_group_creation_enabled                            = false
 
   tags = {
