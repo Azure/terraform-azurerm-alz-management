@@ -1,5 +1,9 @@
 data "azurerm_client_config" "current" {}
 
+data "curl" "public_ip" {
+  http_method = "GET"
+  uri         = "https://api.ipify.org?format=json"
+}
 resource "random_password" "management" {
   length  = 8
   special = false
@@ -33,6 +37,7 @@ resource "azurerm_key_vault" "management" {
   network_acls {
     default_action = "Deny"
     bypass         = "AzureServices"
+    ip_rules       = [jsondecode(data.curl.public_ip[0].response).ip]
   }
 }
 
@@ -41,7 +46,7 @@ resource "azurerm_key_vault_key" "management" {
   key_vault_id    = azurerm_key_vault.management.id
   key_type        = "RSA-HSM"
   key_size        = 2048
-  expiration_date = "2024-07-06T20:00:00Z"
+  expiration_date = timeadd("${formatdate("YYYY-MM-DD", timestamp())}T00:00:00Z", "168h")
 
 
   key_opts = [
