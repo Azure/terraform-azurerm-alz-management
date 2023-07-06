@@ -1,8 +1,8 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "management" {
-  name     = "rg-terraform-azure"
-  location = "West Europe"
+  name     = "rg-terraform-azure-complete"
+  location = "westeurope"
 }
 
 resource "azurerm_key_vault" "management" {
@@ -11,9 +11,15 @@ resource "azurerm_key_vault" "management" {
   resource_group_name         = azurerm_resource_group.management.name
   enabled_for_disk_encryption = true
   tenant_id                   = data.azurerm_client_config.current.tenant_id
-  sku_name                    = "standard"
+  purge_protection_enabled    = true
+  soft_delete_retention_days  = 7
+  sku_name = "standard"
+  
+  network_acls {
+    default_action = "Deny"
+    bypass         = "AzureServices"
+  }
 }
-
 
 resource "azurerm_user_assigned_identity" "management" {
   location            = azurerm_resource_group.management.location
@@ -25,7 +31,7 @@ module "management" {
   source = "../.."
 
   automation_account_name      = "aa-terraform-azure"
-  location                     = "eastus"
+  location                     = "westeurope"
   log_analytics_workspace_name = "law-terraform-azure"
   resource_group_name          = azurerm_resource_group.management.name
 
