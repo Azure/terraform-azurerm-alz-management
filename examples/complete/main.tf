@@ -21,6 +21,15 @@ resource "azurerm_key_vault" "management" {
   soft_delete_retention_days  = 7
   sku_name                    = "standard"
 
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    key_permissions = [
+      "Get",
+    ]
+  }
+
   network_acls {
     default_action = "Deny"
     bypass         = "AzureServices"
@@ -28,10 +37,12 @@ resource "azurerm_key_vault" "management" {
 }
 
 resource "azurerm_key_vault_key" "management" {
-  name         = "generated-certificate"
-  key_vault_id = azurerm_key_vault.management.id
-  key_type     = "RSA"
-  key_size     = 2048
+  name            = "generated-certificate"
+  key_vault_id    = azurerm_key_vault.management.id
+  key_type        = "RSA-HSM"
+  key_size        = 2048
+  expiration_date = "2024-07-06T20:00:00Z"
+
 
   key_opts = [
     "decrypt",
