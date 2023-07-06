@@ -27,6 +27,31 @@ resource "azurerm_key_vault" "management" {
   }
 }
 
+resource "azurerm_key_vault_key" "management" {
+  name         = "generated-certificate"
+  key_vault_id = azurerm_key_vault.management.id
+  key_type     = "RSA"
+  key_size     = 2048
+
+  key_opts = [
+    "decrypt",
+    "encrypt",
+    "sign",
+    "unwrapKey",
+    "verify",
+    "wrapKey",
+  ]
+
+  rotation_policy {
+    automatic {
+      time_before_expiry = "P30D"
+    }
+
+    expire_after         = "P90D"
+    notify_before_expiry = "P29D"
+  }
+}
+
 resource "azurerm_user_assigned_identity" "management" {
   location            = azurerm_resource_group.management.location
   name                = "id-terraform-azure"
@@ -42,7 +67,7 @@ module "management" {
   resource_group_name          = azurerm_resource_group.management.name
 
   automation_account_encryption = {
-    key_vault_key_id          = azurerm_key_vault.management.id
+    key_vault_key_id          = azurerm_key_vault_key.management.id
     user_assigned_identity_id = azurerm_user_assigned_identity.management.id
   }
 
