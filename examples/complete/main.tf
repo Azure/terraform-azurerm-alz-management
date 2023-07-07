@@ -1,5 +1,3 @@
-data "azurerm_client_config" "current" {}
-
 resource "azurerm_resource_group" "management" {
   name     = "rg-terraform-azure-complete"
   location = "westeurope"
