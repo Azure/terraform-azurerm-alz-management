@@ -21,7 +21,7 @@ variable "resource_group_name" {
 variable "automation_account_encryption" {
   type = object({
     key_vault_key_id          = string
-    user_assigned_identity_id = optional(set(string))
+    user_assigned_identity_id = optional(string, null)
   })
   default     = null
   description = "The encryption configuration for the Azure Automation Account."
@@ -30,7 +30,7 @@ variable "automation_account_encryption" {
 variable "automation_account_identity" {
   type = object({
     type         = string
-    identity_ids = optional(set(string))
+    identity_ids = optional(set(string), null)
   })
   default     = null
   description = "The identity to assign to the Azure Automation Account."
