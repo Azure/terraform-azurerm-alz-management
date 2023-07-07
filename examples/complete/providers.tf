@@ -9,6 +9,10 @@ terraform {
       source  = "hashicorp/random"
       version = ">=3.1.0, <4.0"
     }
+    curl = {
+      source  = "anschoewe/curl"
+      version = "1.0.2"
+    }
   }
 }
 
@@ -19,5 +23,3 @@ provider "azurerm" {
     }
   }
 }
-
-provider "random" {}

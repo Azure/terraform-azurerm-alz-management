@@ -30,7 +30,7 @@ variable "automation_account_encryption" {
 variable "automation_account_identity" {
   type = object({
     type         = string
-    identity_ids = optional(set(string))
+    identity_ids = optional(set(string), null)
   })
   default     = null
   description = "The identity to assign to the Azure Automation Account."

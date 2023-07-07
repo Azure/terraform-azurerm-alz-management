@@ -1,77 +1,18 @@
 data "azurerm_client_config" "current" {}
 
-data "curl" "public_ip" {
-  http_method = "GET"
-  uri         = "https://api.ipify.org?format=json"
-}
-resource "random_password" "management" {
-  length  = 8
-  special = false
-  upper   = false
-}
-
 resource "azurerm_resource_group" "management" {
   name     = "rg-terraform-azure-complete"
   location = "westeurope"
-}
-
-resource "azurerm_key_vault" "management" {
-  name                        = "kv-${random_password.management.result}-azure"
-  location                    = azurerm_resource_group.management.location
-  resource_group_name         = azurerm_resource_group.management.name
-  enabled_for_disk_encryption = true
-  tenant_id                   = data.azurerm_client_config.current.tenant_id
-  purge_protection_enabled    = true
-  soft_delete_retention_days  = 7
-  sku_name                    = "standard"
-
-  access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.object_id
-
-    key_permissions = [
-      "Get",
-    ]
-  }
-
-  network_acls {
-    default_action = "Deny"
-    bypass         = "AzureServices"
-    ip_rules       = [jsondecode(data.curl.public_ip[0].response).ip]
-  }
-}
-
-resource "azurerm_key_vault_key" "management" {
-  name            = "generated-certificate"
-  key_vault_id    = azurerm_key_vault.management.id
-  key_type        = "RSA-HSM"
-  key_size        = 2048
-  expiration_date = timeadd("${formatdate("YYYY-MM-DD", timestamp())}T00:00:00Z", "168h")
-
-
-  key_opts = [
-    "decrypt",
-    "encrypt",
-    "sign",
-    "unwrapKey",
-    "verify",
-    "wrapKey",
-  ]
-
-  rotation_policy {
-    automatic {
-      time_before_expiry = "P30D"
-    }
-
-    expire_after         = "P90D"
-    notify_before_expiry = "P29D"
-  }
 }
 
 resource "azurerm_user_assigned_identity" "management" {
   location            = azurerm_resource_group.management.location
   name                = "id-terraform-azure"
   resource_group_name = azurerm_resource_group.management.name
+
+  depends_on = [
+    azurerm_resource_group.management
+  ]
 }
 
 module "management" {
@@ -81,11 +22,6 @@ module "management" {
   location                     = "westeurope"
   log_analytics_workspace_name = "law-terraform-azure"
   resource_group_name          = azurerm_resource_group.management.name
-
-  automation_account_encryption = {
-    key_vault_key_id          = azurerm_key_vault_key.management.id
-    user_assigned_identity_id = azurerm_user_assigned_identity.management.id
-  }
 
   automation_account_identity = {
     type         = "SystemAssigned, UserAssigned"
@@ -141,5 +77,8 @@ module "management" {
   tracing_tags_enabled = true
   tracing_tags_prefix  = "alz_"
 
+  depends_on = [
+    azurerm_resource_group.management,
+    azurerm_user_assigned_identity.management
+  ]
 }
-
