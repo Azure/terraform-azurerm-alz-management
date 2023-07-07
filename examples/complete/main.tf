@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "management" {
-  name     = "rg-terraform-azure-complete"
   location = "westeurope"
+  name     = "rg-terraform-azure-complete"
 }
 
 resource "azurerm_user_assigned_identity" "management" {

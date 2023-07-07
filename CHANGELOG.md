@@ -4,6 +4,7 @@
 
 **Merged pull requests:**
 
+- Add Complete Test [\#15](https://github.com/Azure/terraform-azurerm-alz-management/pull/15) ([luke-taylor](https://github.com/luke-taylor))
 - Bump google.golang.org/grpc from 1.51.0 to 1.53.0 in /test [\#14](https://github.com/Azure/terraform-azurerm-alz-management/pull/14) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v0.1.3](https://github.com/Azure/terraform-azurerm-alz-management/tree/v0.1.3) (2023-07-04)
