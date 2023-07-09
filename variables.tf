@@ -40,24 +40,28 @@ variable "automation_account_local_authentication_enabled" {
   type        = bool
   default     = true
   description = "Whether or not local authentication is enabled for the Azure Automation Account."
+  nullable    = false
 }
 
 variable "automation_account_public_network_access_enabled" {
   type        = bool
   default     = true
   description = "Whether or not public network access is enabled for the Azure Automation Account."
+  nullable    = false
 }
 
 variable "automation_account_sku_name" {
   type        = string
   default     = "Basic"
   description = "The name of the SKU for the Azure Automation Account to create."
+  nullable    = false
 }
 
 variable "linked_automation_account_creation_enabled" {
   type        = bool
   default     = true
   description = "A boolean flag to determine whether to deploy the Azure Automation Account linked to the Log Analytics Workspace or not."
+  nullable    = false
 }
 
 variable "log_analytics_solution_plans" {
@@ -116,12 +120,14 @@ variable "log_analytics_solution_plans" {
     },
   ]
   description = "The Log Analytics Solution Plans to create."
+  nullable    = false
 }
 
 variable "log_analytics_workspace_allow_resource_only_permissions" {
   type        = bool
   default     = false
   description = "Whether or not to allow resource-only permissions for the Log Analytics Workspace."
+  nullable    = false
 }
 
 variable "log_analytics_workspace_cmk_for_query_forced" {
@@ -140,12 +146,14 @@ variable "log_analytics_workspace_internet_ingestion_enabled" {
   type        = bool
   default     = true
   description = "Whether or not internet ingestion is enabled for the Log Analytics Workspace."
+  nullable    = false
 }
 
 variable "log_analytics_workspace_internet_query_enabled" {
   type        = bool
   default     = true
   description = "Whether or not internet query is enabled for the Log Analytics Workspace."
+  nullable    = false
 }
 
 variable "log_analytics_workspace_reservation_capacity_in_gb_per_day" {
@@ -158,24 +166,28 @@ variable "log_analytics_workspace_retention_in_days" {
   type        = number
   default     = 30
   description = "The number of days to retain data for the Log Analytics Workspace."
+  nullable    = false
 }
 
 variable "log_analytics_workspace_sku" {
   type        = string
   default     = "PerGB2018"
   description = "The SKU to use for the Log Analytics Workspace."
+  nullable    = false
 }
 
 variable "resource_group_creation_enabled" {
   type        = bool
   default     = true
   description = "A boolean flag to determine whether to deploy the Azure Resource Group or not."
+  nullable    = false
 }
 
 variable "tags" {
   type        = map(string)
   default     = {}
   description = "A map of tags to apply to the resources created."
+  nullable    = false
 }
 
 # tflint-ignore: terraform_unused_declarations
