@@ -4,6 +4,7 @@
 
 **Merged pull requests:**
 
+- Bump github.com/Azure/terraform-module-test-helper from 0.14.0 to 0.15.0 in /test [\#20](https://github.com/Azure/terraform-azurerm-alz-management/pull/20) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump github.com/gruntwork-io/terratest from 0.43.7 to 0.43.8 in /test [\#18](https://github.com/Azure/terraform-azurerm-alz-management/pull/18) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump github.com/gruntwork-io/terratest from 0.43.6 to 0.43.7 in /test [\#17](https://github.com/Azure/terraform-azurerm-alz-management/pull/17) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Add `nullable=false` to Variables [\#16](https://github.com/Azure/terraform-azurerm-alz-management/pull/16) ([luke-taylor](https://github.com/luke-taylor))
