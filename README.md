@@ -232,10 +232,9 @@ No modules.
 
 ## Outputs
 
-| Name                                                                                                                                                  | Description                                                     |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
-| <a name="output_automation_account_msi_principal_id"></a> [automation\_account\_msi\_principal\_id](#output\_automation\_account\_msi\_principal\_id) | value of the MSI principal ID for the Azure Automation Account. |
-| <a name="output_automation_account_resource_id"></a> [automation\_account\_resource\_id](#output\_automation\_account\_resource\_id)                  | value of the resource ID for the Azure Automation Account.      |
-| <a name="output_log_analytics_workspace_resource_id"></a> [log\_analytics\_workspace\_resource\_id](#output\_log\_analytics\_workspace\_resource\_id) | value of the resource ID for the Log Analytics Workspace.       |
-| <a name="output_resource_group_resource_id"></a> [resource\_group\_resource\_id](#output\_resource\_group\_resource\_id)                              | value of the resource ID for the Azure Resource Group.          |
+| Name                                                                                                          | Description                                       |
+|---------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
+| <a name="output_automation_account"></a> [automation\_account](#output\_automation\_account)                  | A curated output of the Azure Automation Account. |
+| <a name="output_log_analytics_workspace"></a> [log\_analytics\_workspace](#output\_log\_analytics\_workspace) | A curated output of the Log Analytics Workspace.  |
+| <a name="output_resource_group"></a> [resource\_group](#output\_resource\_group)                              | A curated output of the Azure Resource Group.     |
 <!-- END_TF_DOCS -->
