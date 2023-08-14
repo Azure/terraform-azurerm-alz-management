@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased](https://github.com/Azure/terraform-azurerm-alz-management/tree/HEAD)
+
+**Merged pull requests:**
+
+- Bump github.com/gruntwork-io/terratest from 0.43.11 to 0.43.12 in /test [\#24](https://github.com/Azure/terraform-azurerm-alz-management/pull/24) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v0.1.4](https://github.com/Azure/terraform-azurerm-alz-management/tree/v0.1.4) (2023-08-06)
 
 **Merged pull requests:**
