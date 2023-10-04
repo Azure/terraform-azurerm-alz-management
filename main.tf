@@ -46,7 +46,7 @@ resource "azurerm_log_analytics_workspace" "management" {
 resource "azurerm_automation_account" "management" {
   count = var.linked_automation_account_creation_enabled ? 1 : 0
 
-  location                      = var.location
+  location                      = coalesce(var.automation_account_location, var.location)
   name                          = var.automation_account_name
   resource_group_name           = var.resource_group_name
   sku_name                      = var.automation_account_sku_name
