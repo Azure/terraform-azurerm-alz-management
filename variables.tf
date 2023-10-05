@@ -27,6 +27,13 @@ variable "automation_account_encryption" {
   description = "The encryption configuration for the Azure Automation Account."
 }
 
+# Adding to support scenarios such as https://learn.microsoft.com/en-us/azure/automation/how-to/region-mappings#supported-mappings-for-log-analytics-and-azure-automation
+variable "automation_account_location" {
+  type        = string
+  default     = null
+  description = "The Azure region of the Azure Automation Account to deploy. This suppports overriding the location variable in specific cases."
+}
+
 variable "automation_account_identity" {
   type = object({
     type         = string
