@@ -4,6 +4,7 @@
 
 **Merged pull requests:**
 
+- fix: Update automation account provisioning to support special cases properly. [\#30](https://github.com/Azure/terraform-azurerm-alz-management/pull/30) ([OmnipotentOwl](https://github.com/OmnipotentOwl))
 - Bump github.com/gruntwork-io/terratest from 0.43.13 to 0.44.0 in /test [\#26](https://github.com/Azure/terraform-azurerm-alz-management/pull/26) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump github.com/gruntwork-io/terratest from 0.43.12 to 0.43.13 in /test [\#25](https://github.com/Azure/terraform-azurerm-alz-management/pull/25) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump github.com/gruntwork-io/terratest from 0.43.11 to 0.43.12 in /test [\#24](https://github.com/Azure/terraform-azurerm-alz-management/pull/24) ([dependabot[bot]](https://github.com/apps/dependabot))
