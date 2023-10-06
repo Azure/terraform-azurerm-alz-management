@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased](https://github.com/Azure/terraform-azurerm-alz-management/tree/HEAD)
+## [v0.1.5](https://github.com/Azure/terraform-azurerm-alz-management/tree/v0.1.5) (2023-10-06)
 
 **Merged pull requests:**
 
