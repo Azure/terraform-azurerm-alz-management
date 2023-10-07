@@ -129,3 +129,10 @@ resource "azurerm_log_analytics_solution" "management" {
     azurerm_resource_group.management,
   ]
 }
+
+resource "azurerm_management_lock" "subscription-level" {
+  name       = "subscription-level"
+  scope      = azurerm_automation_account.management[0].id
+  lock_level = "CanNotDelete"
+  notes      = "Items can't be deleted in this subscription!"
+}
