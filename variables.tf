@@ -132,7 +132,7 @@ variable "log_analytics_solution_plans" {
 
 variable "log_analytics_workspace_allow_resource_only_permissions" {
   type        = bool
-  default     = false
+  default     = true
   description = "Whether or not to allow resource-only permissions for the Log Analytics Workspace."
   nullable    = false
 }
@@ -147,6 +147,13 @@ variable "log_analytics_workspace_daily_quota_gb" {
   type        = number
   default     = null
   description = "The daily ingestion quota in GB for the Log Analytics Workspace."
+}
+
+variable "log_analytics_workspace_local_authentication_disabled" {
+  type        = bool
+  default     = false
+  description = "Whether or not local authentication is disabled for the Log Analytics Workspace."
+  nullable    = false
 }
 
 variable "log_analytics_workspace_internet_ingestion_enabled" {
