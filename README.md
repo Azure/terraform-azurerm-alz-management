@@ -1,14 +1,19 @@
+| :warning: WARNING!          |
+|:---------------------------|
+| This repository is no longer maintained. Please use the [terraform-azurerm-avm-ptn-alz-management](https://github.com/Azure/terraform-azurerm-avm-ptn-alz-management) repository for the updated code.
+
 # terraform-azurerm-alz-management
 
-This module deploys a Log Analytics Workspace in Azure with Log Analytics Solutions and a linked Azure Automation Account. 
+This module deploys a Log Analytics Workspace in Azure with Log Analytics Solutions and a linked Azure Automation Account.
 
-## Features 
+## Features
+
 - Deployment of Log Analytics Workspace.
-- Opitional deployment of Azure Automation Account. 
-- Optional deployment of Azure Resource Group. 
+- Opitional deployment of Azure Automation Account.
+- Optional deployment of Azure Resource Group.
 - Customizable Log Analytics Solutions.
 
-## Example 
+## Example
 
 ```hcl
 module "alz-management" {
@@ -91,7 +96,8 @@ The actual applied tags would be:
   custom_prefix_yor_trace            = "00a12560-70eb-4d00-81b9-d4059bc7ed62"
 }
 ```
-## Contributing 
+
+## Contributing
 
 ### Pre-Commit, Pr-Check, and Test
 
@@ -120,25 +126,25 @@ We provide a docker image to run the pre-commit checks and tests for you: `mcr.m
 To run the pre-commit task, we can run the following command:
 
 ```shell
-$ docker run --rm -v $(pwd):/src -w /src mcr.microsoft.com/azterraform:latest make pre-commit
+docker run --rm -v $(pwd):/src -w /src mcr.microsoft.com/azterraform:latest make pre-commit
 ```
 
 On Windows Powershell:
 
 ```shell
-$ docker run --rm -v ${pwd}:/src -w /src mcr.microsoft.com/azterraform:latest make pre-commit
+docker run --rm -v ${pwd}:/src -w /src mcr.microsoft.com/azterraform:latest make pre-commit
 ```
 
 NOTE: If an error occurs in Powershell that indicates `Argument or block definition required` for `unit-fixture/locals.tf` and/or `unit-fixture/variables.tf`, the issue could be that the symlink is not configured properly.  This can be fixed as described in [this link](https://stackoverflow.com/questions/5917249/git-symbolic-links-in-windows/59761201#59761201):
 
 ```shell
-$ git config core.symlinks true
+git config core.symlinks true
 ```
 
 Then switch branches, or execute git reset:
 
 ```shell
-$ git reset --hard HEAD
+git reset --hard HEAD
 ```
 
 In pre-commit task, we will:
@@ -153,13 +159,13 @@ In pre-commit task, we will:
 Then we can run the pr-check task to check whether our code meets our pipeline's requirements (We strongly recommend you run the following command before you commit):
 
 ```shell
-$ docker run --rm -v $(pwd):/src -w /src mcr.microsoft.com/azterraform:latest make pr-check
+docker run --rm -v $(pwd):/src -w /src mcr.microsoft.com/azterraform:latest make pr-check
 ```
 
 On Windows Powershell:
 
 ```shell
-$ docker run --rm -v ${pwd}:/src -w /src mcr.microsoft.com/azterraform:latest make pr-check
+docker run --rm -v ${pwd}:/src -w /src mcr.microsoft.com/azterraform:latest make pr-check
 ```
 
 To run the e2e-test, we can run the following command:
