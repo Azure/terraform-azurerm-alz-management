@@ -1,6 +1,4 @@
-| :warning: WARNING!          |
-|:---------------------------|
-| This repository is no longer maintained. Please use the [terraform-azurerm-avm-ptn-alz-management](https://github.com/Azure/terraform-azurerm-avm-ptn-alz-management) repository for the updated code.
+:warning: WARNING! This repository is no longer maintained. Please use the [terraform-azurerm-avm-ptn-alz-management](https://github.com/Azure/terraform-azurerm-avm-ptn-alz-management) repository for the updated code.
 
 # terraform-azurerm-alz-management
 
